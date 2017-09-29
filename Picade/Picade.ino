@@ -155,7 +155,23 @@ void update(void) {
          || default_config.buttons[i].key == JOY1_Y
          || default_config.buttons[i].key == JOY2_X
          || default_config.buttons[i].key == JOY2_Y ) {
-      state = map(analogRead(picade_pins[i]), 0, 1023, 0, 254);
+      
+      // carcade HAX for smaller range on pots
+      int hax_state;
+      
+      hax_state = map(analogRead(picade_pins[i]), 0, 1023, -50, 304);
+      
+      if (hax_state < 0) 
+      {
+          hax_state = 0;
+      }
+      
+      if (hax_state > 254) 
+      {
+          hax_state = 254;
+      }
+      
+      state = hax_state;
     }
     else
     {
@@ -469,7 +485,7 @@ void loop() {
     }
   }
 
-  headphone_detect();
+  //headphone_detect();
   volume_track();
   if(volume_target_reached()){ 
     save_volume();
