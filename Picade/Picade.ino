@@ -159,7 +159,7 @@ void update(void) {
       // carcade HAX for smaller range on pots
       int hax_state;
       
-      hax_state = map(analogRead(picade_pins[i]), 0, 1023, -75, 329);
+      hax_state = map(analogRead(picade_pins[i]), 0, 1023, -100, 354);
       
       if (hax_state < 0) 
       {
